@@ -1,0 +1,41 @@
+# Ingredient order site
+
+## How to run
+
+#### Clone project:
+```bash
+git clone https://github.com/Stinesc/ingredient_order_site.git
+```
+#### Install PostgreSQL:
+```bash
+sudo apt-get install postgresql
+```
+#### Start PostgreSQL console:
+```bash
+sudo -u postgres psql
+```
+#### Create database and user:
+```bash
+CREATE DATABASE ingredient_order_site_db;
+CREATE USER ingredient_order_site_db_admin WITH PASSWORD '123';
+CTRL + D
+```
+#### Create, activate virtual environment and install packages:
+```bash
+virtualenv -p python3 env
+source env/bin/activate
+pip3 install -r requirements.txt
+```
+#### Make migrations and migrate:
+```bash
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+#### Create superuser:
+```bash
+python3 manage.py createsuperuser
+```
+#### Run server:
+```bash
+python3 manage.py runserver
+```
