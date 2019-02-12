@@ -3,7 +3,7 @@ from .models import Dish, Ingredient, Order, DishIngredient, OrderIngredient
 
 
 class DishAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'description')
     list_filter = ('name',)
     search_fields = ('name',)
 
