@@ -3,6 +3,7 @@ from django.db import models
 
 class Dish(models.Model):
     name = models.CharField(max_length=32, unique=True)
+    description = models.CharField(max_length=256, blank=True, default="")
     ingredients = models.ManyToManyField('Ingredient', through='DishIngredient')
 
     def __str__(self):
