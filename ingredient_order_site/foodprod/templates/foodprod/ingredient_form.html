@@ -1,0 +1,14 @@
+{% extends "foodprod/base.html" %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.errors }}
+        <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input class="form-control" type="text" id="nameInput" value="{{ form.name.value|default_if_none:'' }}">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Save">
+    </form>
+{% endblock %}
+
+

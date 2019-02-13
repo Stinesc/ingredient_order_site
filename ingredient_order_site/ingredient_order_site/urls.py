@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda request: redirect('index', permanent=False)),
+    path('', lambda request: redirect('foodprod:index', permanent=False)),
     path('admin/', admin.site.urls),
-    path('foodprod/', include('foodprod.urls')),
+    path('foodprod/', include(('foodprod.urls', 'foodprod'), namespace='foodprod')),
 ]

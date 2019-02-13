@@ -46,7 +46,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
-    <a class="navbar-brand" href="#">Ingredient order</a>
+    <a class="navbar-brand" href="{% url 'foodprod:index' %}">Ingredient order</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -55,10 +55,13 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'foodprod:ingredients' %}">Ingredients <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'foodprod:index' %}">Orders <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="{% url 'index' %}" method="GET">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'foodprod:index' %}" method="GET">
             <input required class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
                    name="search_query" value="{{ search_query }}">
             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>

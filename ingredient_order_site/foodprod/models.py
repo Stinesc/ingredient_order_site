@@ -49,7 +49,7 @@ class OrderIngredient(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE)
     ingredient = models.ForeignKey('Ingredient', on_delete=models.CASCADE, related_name='order_ingredients', blank=True,
                                    null=True)
-    quantity = models.FloatField(default=0.0, blank=True, null=True)
+    quantity = models.FloatField(default=1.0, blank=True, null=True)
 
     def __str__(self):
         return f"Order: {self.order} <> Ingredient: {self.ingredient}"
