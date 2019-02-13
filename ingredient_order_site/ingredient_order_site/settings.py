@@ -51,13 +51,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 ROOT_URLCONF = 'ingredient_order_site.urls'
 
 TEMPLATES = [
@@ -117,7 +110,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 try:
-    from . import local_settings
+    from .local_settings import *
 except ImportError:
     # No local settings was found, skipping.
     pass
