@@ -1,9 +1,8 @@
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, DeleteView, FormView
-from django.views.generic.edit import ModelFormMixin
+from .forms import DishIngredientFormSet
 from django.db.models import Q
 from django.urls import reverse_lazy
 from .models import Dish, Ingredient, DishIngredient
-from .forms import DishForm
 
 
 class IndexView(ListView):
@@ -25,38 +24,63 @@ class DishDetailView(DetailView):
     model = Dish
 
 
-class DishCreateView(FormView):
-    template_name = "foodprod/dish_form.html"
-    form_class = DishForm
+class DishCreateView(CreateView):
+    model = Dish
+    fields = ['name', 'description']
+    success_url=reverse_lazy('foodprod:index')
+
+    def get_context_data(self, **kwargs):
+        context = super(DishCreateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['dish_ingredient_formset'] = DishIngredientFormSet(self.request.POST)
+        else:
+            context['dish_ingredient_formset'] = DishIngredientFormSet()
+        return context
 
     def form_valid(self, form):
-        name = form.cleaned_data['name']
-        description = form.cleaned_data['description']
-        ingredients = form.cleaned_data['ingredients']
-        dish = Dish(name=name, description=description)
-        dish.save()
-        ingredient_list = Ingredient.objects.filter(pk__in=ingredients)
-        for ingredient in ingredient_list:
-            dish_ingredient = DishIngredient()
-            dish_ingredient.dish = dish
-            dish_ingredient.ingredient = ingredient
-            dish_ingredient.quantity = form.cleaned_data[str(ingredient.pk)]
-            dish_ingredient.save()
-        return super(ModelFormMixin, self).form_valid(form)
+        context = self.get_context_data(form=form)
+        formset = context['dish_ingredient_formset']
+        if formset.is_valid():
+            response = super().form_valid(form)
+            formset.instance = self.object
+            formset.save()
+            return response
+        else:
+            return super().form_invalid(form)
 
-    '''model = Dish
-    fields = ['name', 'description', 'ingredients']
+
+class DishUpdateView(UpdateView):
+    model = Dish
+    fields = ['name', 'description']
+    success_url = reverse_lazy('foodprod:index')
+
+    def get_context_data(self, **kwargs):
+        context = super(DishUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['dish_ingredient_formset'] = DishIngredientFormSet(self.request.POST, instance=self.object)
+            context['dish_ingredient_formset'].full_clean()
+        else:
+            context['dish_ingredient_formset'] = DishIngredientFormSet(instance=self.object)
+        return context
 
     def form_valid(self, form):
-        print('sdfsd')
-        self.object = form.save(commit=False)
-        for ingredient in form.cleaned_data['ingredients']:
-            dish_ingredient = DishIngredient()
-            dish_ingredient.dish = self.object
-            dish_ingredient.ingredient = ingredient
-            dish_ingredient.save()
-            print(ingredient)
-        return super(ModelFormMixin, self).form_valid(form)'''
+        context = self.get_context_data(form=form)
+        formset = context['dish_ingredient_formset']
+        print(context['dish_ingredient_formset'])
+        if formset.is_valid():
+            print('valid')
+            response = super().form_valid(form)
+            formset.instance = self.object
+            formset.save()
+            return response
+        else:
+            print('not valid')
+            return super().form_invalid(form)
+
+
+class DishDeleteView(DeleteView):
+    model = Dish
+    success_url = reverse_lazy('foodprod:index')
 
 
 class IngredientsListView(ListView):

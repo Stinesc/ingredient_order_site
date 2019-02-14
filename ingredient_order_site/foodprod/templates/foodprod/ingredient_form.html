@@ -3,10 +3,9 @@
     <form method="post">
         {% csrf_token %}
         {{ form.errors }}
-        <div class="form-group">
-            <label for="nameInput">Name</label>
-            <input class="form-control" type="text" id="nameInput" value="{{ form.name.value|default_if_none:'' }}">
-        </div>
+        <table class="my-3">
+        {{ form.as_table }}
+        </table>
         <input class="btn btn-primary" type="submit" value="Save">
     </form>
 {% endblock %}

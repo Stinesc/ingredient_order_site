@@ -1,9 +1,7 @@
-from django import forms
-from .models import Ingredient
+from django.forms.models import inlineformset_factory
+from .models import Dish, DishIngredient, Ingredient
 
 
-class DishForm(forms.Form):
-    name = forms.CharField()
-    description = forms.CharField()
-    ingredients = forms.ModelMultipleChoiceField(Ingredient.objects.all())
-    #quantity = forms.FloatField()
+DishIngredientFormSet = inlineformset_factory(Dish, DishIngredient, fields=['ingredient', 'quantity'], exclude=[],
+                                              extra=Ingredient.objects.count(), max_num=Ingredient.objects.count(),
+                                              can_delete=False)

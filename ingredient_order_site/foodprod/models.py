@@ -44,6 +44,9 @@ class DishIngredient(models.Model):
     def __str__(self):
         return f"Dish: {self.dish} <> Ingredient: {self.ingredient} <> Quantity: {self.quantity}"
 
+    class Meta:
+        auto_created = True
+
 
 class OrderIngredient(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE)

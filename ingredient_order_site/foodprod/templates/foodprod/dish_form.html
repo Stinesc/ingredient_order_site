@@ -2,32 +2,13 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{ form.errors }}
-    <div class="mt-2 form-group">
-        <label for="nameInput">Name</label>
-        <input name="name" class="form-control" type="text" id="nameInput" value="{{ form.name.value|default_if_none:'' }}" required>
-    </div>
-    <div class="form-group">
-        <label for="descriptionInput">Description</label>
-        <textarea name="description" class="form-control" type="text" id="descriptionInput" value="{{ form.description.value|default_if_none:'' }}" rows="3">
-        </textarea>
-    </div>
-    <div class="row">
-        <div class="form-group col-9">
-            <label for="ingredientsNameInput">Select ingredients</label>
-            <select multiple name="ingredients" class="form-control form-control-lg" id="ingredientsNameInput" required>
-              {% for ingredient in form.ingredients %}
-                {{ ingredient }}
-              {% endfor %}
-            </select>
-        </div>
-        <div class="form-group col-3">
-            <p>Quantity</p>
-            {% for ingredient in form.ingredients %}
-                <input name="{{ ingredient.id }}" class="mb-1 form-control form-control-sm" type="number" value="1" id="quantityInput">
-            {% endfor %}
-        </div>
-    </div>
+    <table class="my-3">
+        {{ form.as_table }}
+    </table>
+    <p>Select ingredients and quantity</p>
+    <table class="my-3">
+        {{ dish_ingredient_formset.as_table }}
+    </table>
     <input class="btn btn-primary" type="submit" value="Save">
 </form>
 {% endblock %}
