@@ -1,8 +1,10 @@
-from django.views.generic import CreateView, UpdateView, DetailView, ListView, DeleteView, FormView
-from .forms import DishIngredientFormSet
+from django.views.generic import CreateView, UpdateView, DetailView, ListView, DeleteView
+from django.views import View
+from django.shortcuts import redirect
+from .forms import DishIngredientFormSet, OrderIngredientFormSet
 from django.db.models import Q
 from django.urls import reverse_lazy
-from .models import Dish, Ingredient, DishIngredient
+from .models import Dish, Ingredient, Order, DishIngredient, OrderIngredient
 
 
 class IndexView(ListView):
@@ -66,15 +68,12 @@ class DishUpdateView(UpdateView):
     def form_valid(self, form):
         context = self.get_context_data(form=form)
         formset = context['dish_ingredient_formset']
-        print(context['dish_ingredient_formset'])
         if formset.is_valid():
-            print('valid')
             response = super().form_valid(form)
             formset.instance = self.object
             formset.save()
             return response
         else:
-            print('not valid')
             return super().form_invalid(form)
 
 
@@ -96,6 +95,7 @@ class IngredientDetailView(DetailView):
 class IngredientCreateView(CreateView):
     model = Ingredient
     fields = ['name']
+    success_url = reverse_lazy('foodprod:ingredients')
 
 
 class IngredientUpdateView(UpdateView):
@@ -107,3 +107,56 @@ class IngredientUpdateView(UpdateView):
 class IngredientDeleteView(DeleteView):
     model = Ingredient
     success_url = reverse_lazy('foodprod:ingredients')
+
+
+class OrdersListView(ListView):
+    template_name = "foodprod/orders.html"
+    model = Order
+
+
+class OrderDetailView(DetailView):
+    template_name = "foodprod/order.html"
+    model = Order
+
+
+class OrderCreateView(View):
+
+    def get(self, request, *args, **kwargs):
+        dish_id = self.kwargs['dish_id']
+        dish = Dish.objects.get(pk=dish_id)
+        dish_ingredients = DishIngredient.objects.filter(dish=dish)
+        order = Order.objects.create()
+        for obj in dish_ingredients:
+            OrderIngredient.objects.create(order=order, ingredient=obj.ingredient, quantity=obj.quantity)
+        return redirect('foodprod:order_update', pk=order.pk)
+
+
+class OrderUpdateView(UpdateView):
+    model = Order
+    fields = []
+    success_url = reverse_lazy('foodprod:orders')
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['order_ingredient_formset'] = OrderIngredientFormSet(self.request.POST, instance=self.object)
+            context['order_ingredient_formset'].full_clean()
+        else:
+            context['order_ingredient_formset'] = OrderIngredientFormSet(instance=self.object)
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data(form=form)
+        formset = context['order_ingredient_formset']
+        if formset.is_valid():
+            response = super().form_valid(form)
+            formset.instance = self.object
+            formset.save()
+            return response
+        else:
+            return super().form_invalid(form)
+
+
+class OrderDeleteView(DeleteView):
+    model = Order
+    success_url = reverse_lazy('foodprod:orders')

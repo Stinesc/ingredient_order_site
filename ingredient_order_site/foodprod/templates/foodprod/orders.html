@@ -1,0 +1,25 @@
+{% extends "foodprod/base.html" %}
+{% block content %}
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h6 class="border-bottom border-gray pb-2 mb-0">List of orders</h6>
+        {% for order in object_list %}
+            <div class="media text-muted pt-3">
+              <p class="media-body pb-3 mb-0 lh-125">
+                <a href="{% url 'foodprod:order' order.id%}" class="d-block text-gray-dark"># {{ order.id }}</a>
+              </p>
+            </div>
+            <div class="row">
+                <a href="{% url 'foodprod:order_update' order.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
+                <a href="{% url 'foodprod:order_delete' order.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">Delete</a>
+            </div>
+        {% empty %}
+            <div class="media text-muted pt-3">
+              <p class="media-body pb-3 mb-0 lh-125">
+                <strong class="d-block text-gray-dark">No orders yet.</strong>
+              </p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

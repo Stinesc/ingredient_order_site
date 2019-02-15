@@ -12,10 +12,10 @@
               <p class="media-body pb-3 mb-0 lh-125">
                 <a href="{% url 'foodprod:ingredient' ingredient.id%}" class="d-block text-gray-dark">{{ ingredient.name }}</a>
               </p>
-            <div class="row">
-                <a href="{% url 'foodprod:ingredient_update' ingredient.id %}" type="button" class="mt-4 mr-3 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
-                <a href="{% url 'foodprod:ingredient_delete' ingredient.id %}" type="button" class="mt-4 btn btn-outline-danger btn-sm align-items-center">Delete</a>
             </div>
+            <div class="row">
+                <a href="{% url 'foodprod:ingredient_update' ingredient.id %}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
+                <a href="{% url 'foodprod:ingredient_delete' ingredient.id %}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">Delete</a>
             </div>
         {% empty %}
             <div class="media text-muted pt-3">

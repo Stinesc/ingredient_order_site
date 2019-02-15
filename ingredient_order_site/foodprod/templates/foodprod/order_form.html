@@ -1,0 +1,11 @@
+{% extends "foodprod/base.html" %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <p class="mt-2">Select ingredients and quantity</p>
+    <table class="my-3">
+        {{ order_ingredient_formset.as_table }}
+    </table>
+    <input class="btn btn-primary" type="submit" value="Save">
+</form>
+{% endblock %}

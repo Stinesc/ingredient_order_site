@@ -15,9 +15,9 @@ class IngredientAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'data_time')
-    list_filter = ('id', 'data_time')
-    search_fields = ('id', 'data_time')
+    list_display = ('id', 'creation_datetime')
+    list_filter = ('id', 'creation_datetime')
+    search_fields = ('id', 'creation_datetime')
 
 
 class DishIngredientAdmin(admin.ModelAdmin):

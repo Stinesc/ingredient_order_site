@@ -2,13 +2,13 @@
 {% block content %}
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <p class="border-bottom border-gray pb-2 mb-0">
-            <strong class="d-block text-gray-dark">Dish name: </strong>
-            {{ object.name }}
+            <strong class="d-block text-gray-dark">Order id: </strong>
+            {{ object.id }}
         </p>
             <div class="media text-muted pt-3">
               <p class="media-body pb-3 mb-0 lh-125">
-                  <strong class="d-block text-gray-dark">Dish description: </strong>
-                <strong class="d-block text-gray-dark">{{ object.description }}</strong>
+                  <strong class="d-block text-gray-dark">Order creation date: </strong>
+                <strong class="d-block text-gray-dark">{{ object.creation_datetime }}</strong>
               </p>
             </div>
             <div class="media text-dark pt-3">
@@ -25,19 +25,18 @@
             </tr>
           </thead>
           <tbody>
-        {% for dishingredient in object.dishingredient_set.all %}
+        {% for orderingredient in object.orderingredient_set.all %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ dishingredient.ingredient.name }}</td>
-                <td>{{ dishingredient.quantity }}</td>
+                <td>{{ orderingredient.ingredient.name }}</td>
+                <td>{{ orderingredient.quantity }}</td>
             </tr>
         {% endfor %}
           </tbody>
         </table>
         <div class="row">
-                <a href="{% url 'foodprod:order_create' dish.id%}" type="button" class="ml-2 btn btn-outline-primary btn-sm align-items-center">Order</a>
-                <a href="{% url 'foodprod:dish_update' dish.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
-                <a href="{% url 'foodprod:dish_delete' dish.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">Delete</a>
+                <a href="{% url 'foodprod:order_update' object.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
+                <a href="{% url 'foodprod:order_delete' object.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">Delete</a>
         </div>
     </div>
 {% endblock %}
