@@ -21,4 +21,5 @@ urlpatterns = [
     path('', lambda request: redirect('foodprod:index', permanent=False)),
     path('admin/', admin.site.urls),
     path('foodprod/', include(('foodprod.urls', 'foodprod'), namespace='foodprod')),
+    path('notes/', include(('notes.urls', 'notes'), namespace='notes'))
 ]

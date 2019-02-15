@@ -1,10 +1,13 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
+from notes.models import NoteItem
 
 
 class Dish(models.Model):
     name = models.CharField(max_length=32, unique=True)
     description = models.CharField(max_length=256, blank=True, default="")
     ingredients = models.ManyToManyField('Ingredient', through='DishIngredient')
+    notes = GenericRelation(NoteItem)
 
     def __str__(self):
         return self.name
@@ -27,6 +30,7 @@ class Order(models.Model):
     id = models.AutoField(primary_key=True)
     creation_datetime = models.DateTimeField(auto_now_add=True)
     ingredients = models.ManyToManyField('Ingredient', through='OrderIngredient')
+    notes = GenericRelation(NoteItem)
 
     def __str__(self):
         return str(self.id)

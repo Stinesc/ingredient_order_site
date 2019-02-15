@@ -60,6 +60,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'foodprod:orders' %}">Orders <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'notes:notes' %}">Notes <span class="sr-only">(current)</span></a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{% url 'foodprod:index' %}" method="GET">
             <input required class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"

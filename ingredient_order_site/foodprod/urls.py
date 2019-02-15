@@ -1,5 +1,4 @@
 from django.urls import path
-
 from . import views
 
 urlpatterns = [
@@ -18,5 +17,4 @@ urlpatterns = [
     path('orders/create/<int:dish_id>/', views.OrderCreateView.as_view(), name='order_create'),
     path('orders/update/<int:pk>/', views.OrderUpdateView.as_view(), name='order_update'),
     path('orders/delete/<int:pk>/', views.OrderDeleteView.as_view(), name='order_delete'),
-
 ]
