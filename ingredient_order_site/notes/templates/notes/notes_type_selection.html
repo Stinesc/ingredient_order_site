@@ -5,8 +5,8 @@
         <h2>Select type</h2>
               <p class="lead text-muted">Select entity type to see the list of notes</p>
               <p>
-                <a href="#" class="btn btn-primary m-2">Dishes</a>
-                <a href="#" class="btn btn-secondary m-2">Orders</a>
+                <a href="{% url 'notes:notes_by_type' 'dish'%}" class="btn btn-outline-primary m-2">Dishes</a>
+                <a href="{% url 'notes:notes_by_type' 'order'%}" class="btn btn-outline-secondary m-2">Orders</a>
               </p>
     </div>
 </div>

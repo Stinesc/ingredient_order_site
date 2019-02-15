@@ -1,0 +1,25 @@
+{% extends "foodprod/base.html" %}
+{% block content %}
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h6 class="border-bottom border-gray pb-2 mb-0">List of notes</h6>
+        {% for object in object_list %}
+              <p class="media-body pt-3 mb-0 lh-125 text-muted">
+                  <strong class="d-block text-gray-dark">{{ object.note.creation_datetime }}</strong>
+              </p>
+              <div class="media pb-3">
+                  <p class="media-body pb-3 mb-0 lh-125">
+                    <strong class="d-block text-gray-dark">{{ object.note.title }}</strong>
+                    {{ object.note.body }}
+                  </p>
+              </div>
+        {% empty %}
+            <div class="media text-muted pt-3">
+              <p class="media-body pb-3 mb-0 lh-125">
+                <strong class="d-block text-gray-dark">No notes yet.</strong>
+              </p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
