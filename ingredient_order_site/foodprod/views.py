@@ -122,12 +122,11 @@ class OrderDetailView(DetailView):
 
 class OrderCreateView(View):
 
-    def get(self, request, *args, **kwargs):
-        dish_id = self.kwargs['dish_id']
+    def post(self, request, *args, **kwargs):
+        dish_id = self.request.POST['dish_id']
         dish = Dish.objects.get(pk=dish_id)
         dish_ingredients = DishIngredient.objects.filter(dish=dish)
         quantity_sum = dish_ingredients.aggregate(Sum('quantity')).get('quantity__sum', 0.0)
-        print(quantity_sum)
         if dish_ingredients and quantity_sum > 0:
             order = Order.objects.create()
             for obj in dish_ingredients:
