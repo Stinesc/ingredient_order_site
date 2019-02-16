@@ -18,6 +18,7 @@ sudo -u postgres psql
 ```bash
 CREATE DATABASE ingredient_order_site_db;
 CREATE USER ingredient_order_site_db_admin WITH PASSWORD '123';
+ALTER USER ingredient_order_site_db_admin CREATEDB; (for tests)
 CTRL + D
 ```
 #### Create, activate virtual environment and install packages:
@@ -38,4 +39,8 @@ python3 manage.py createsuperuser
 #### Run server:
 ```bash
 python3 manage.py runserver
+```
+#### Run tests:
+```bash
+python3 manage.py test
 ```
