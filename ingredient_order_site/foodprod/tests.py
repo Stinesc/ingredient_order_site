@@ -21,34 +21,55 @@ class OrderCreateTestCase(TestCase):
 
     def test_order_add_valid(self):
         orders_count = Order.objects.count()
-        order_create_url = reverse('foodprod:order_create', kwargs={'dish_id' : self.dish.id})
-        self.client.get(order_create_url)
+        self.client.post(reverse('foodprod:order_create'), {'dish_id': self.dish.id})
         self.assertEquals(Order.objects.count(), orders_count + 1)
 
     def test_order_add_invalid(self):
         orders_count = Order.objects.count()
-        order_create_url = reverse('foodprod:order_create', kwargs={'dish_id' : self.dish_invalid.id})
-        self.client.get(order_create_url)
+        self.client.post(reverse('foodprod:order_create'), {'dish_id': self.dish_invalid.id})
         self.assertNotEquals(Order.objects.count(), orders_count + 1)
 
 
 class AddIngredientToDishTestCase(TestCase):
 
     def setUp(self):
-        Dish.objects.create(name="some dish", description="Some dish")
-        Ingredient.objects.create(name="some ingredient")
+        self.dish = Dish.objects.create(name="some_dish", description="Some_dish")
+        self.ingredient = Ingredient.objects.create(name="some_ingredient")
 
     def test_add_ingredient_valid(self):
-        dish = Dish.objects.filter(name="some dish").first()
-        dish_update_url = reverse('foodprod:dish_update',kwargs={'pk': dish.id})
-        data = {'form-TOTAL_FORMS': ['1'],
-                'form-MIN_NUM_FORMS': ['0'],
-                'form-INITIAL_FORMS': ['0'],
-                'form-0-ingredient': ['some ingredient'],
-                'form-0-quantity': ['1.0'],
-                'form-0-id': ['']}
-        count_before_add = DishIngredient.objects.filter(dish__name="some dish").count()
+        data = {'csrfmiddlewaretoken': 'yURYMNdCcYkNDwMZk7oQ5J4rcJ10pII8oZFLChWzpjYcj4x8lkhPwyV9S9k6W8jy0',
+                'name': 'some_dish',
+                'description': 'Some_dish',
+                'dishingredient_set-INITIAL_FORMS': '0',
+                'dishingredient_set-TOTAL_FORMS': '1',
+                'dishingredient_set-MAX_NUM_FORMS': '7',
+                'dishingredient_set-MIN_NUM_FORMS': '0',
+                'dishingredient_set-0-ingredient': self.ingredient.id,
+                'dishingredient_set-0-quantity': '1',
+                'dishingredient_set-0-dish': self.dish.id,
+                'dishingredient_set-0-id': ''}
+        count_before_add = DishIngredient.objects.count()
+        dish_update_url = reverse('foodprod:dish_update', kwargs={'pk': self.dish.id})
         response = self.client.post(dish_update_url, data)
-        count_after_add = DishIngredient.objects.filter(dish__name="some dish").count()
+        count_after_add = DishIngredient.objects.count()
         self.assertEqual(count_before_add+1, count_after_add)
         self.assertEqual(response.status_code, 302)
+
+    def test_add_ingredient_invalid(self):
+        data = {'csrfmiddlewaretoken': 'yURYMNdCcYkNDwMZk7oQ5J4rcJ10pII8oZFLChWzpjYcj4x8lkhPwyV9S9k6W8jy0',
+                'name': 'some_dish',
+                'description': 'Some_dish',
+                'dishingredient_set-INITIAL_FORMS': '0',
+                'dishingredient_set-TOTAL_FORMS': '1',
+                'dishingredient_set-MAX_NUM_FORMS': '7',
+                'dishingredient_set-MIN_NUM_FORMS': '0',
+                'dishingredient_set-0-ingredient': self.ingredient.id,
+                'dishingredient_set-0-quantity': '',
+                'dishingredient_set-0-dish': self.dish.id,
+                'dishingredient_set-0-id': ''}
+        count_before_add = DishIngredient.objects.count()
+        dish_update_url = reverse('foodprod:dish_update', kwargs={'pk': self.dish.id})
+        response = self.client.post(dish_update_url, data)
+        count_after_add = DishIngredient.objects.count()
+        self.assertNotEqual(count_before_add+1, count_after_add)
+        self.assertEqual(response.status_code, 200)
