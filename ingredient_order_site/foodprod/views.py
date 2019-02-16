@@ -2,8 +2,9 @@ from django.views.generic import CreateView, UpdateView, DetailView, ListView, D
 from django.views import View
 from django.shortcuts import redirect
 from .forms import DishIngredientFormSet, OrderIngredientFormSet
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.urls import reverse_lazy
+from django.core.exceptions import ValidationError
 from .models import Dish, Ingredient, Order, DishIngredient, OrderIngredient
 
 
@@ -125,10 +126,15 @@ class OrderCreateView(View):
         dish_id = self.kwargs['dish_id']
         dish = Dish.objects.get(pk=dish_id)
         dish_ingredients = DishIngredient.objects.filter(dish=dish)
-        order = Order.objects.create()
-        for obj in dish_ingredients:
-            OrderIngredient.objects.create(order=order, ingredient=obj.ingredient, quantity=obj.quantity)
-        return redirect('foodprod:order_update', pk=order.pk)
+        quantity_sum = dish_ingredients.aggregate(Sum('quantity')).get('quantity__sum', 0.0)
+        print(quantity_sum)
+        if quantity_sum > 0:
+            order = Order.objects.create()
+            for obj in dish_ingredients:
+                OrderIngredient.objects.create(order=order, ingredient=obj.ingredient, quantity=obj.quantity)
+            return redirect('foodprod:order_update', pk=order.pk)
+        else:
+            raise ValidationError("Total quantity must be above 0", code='invalid')
 
 
 class OrderUpdateView(UpdateView):
