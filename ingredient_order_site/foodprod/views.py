@@ -128,13 +128,13 @@ class OrderCreateView(View):
         dish_ingredients = DishIngredient.objects.filter(dish=dish)
         quantity_sum = dish_ingredients.aggregate(Sum('quantity')).get('quantity__sum', 0.0)
         print(quantity_sum)
-        if quantity_sum > 0:
+        if dish_ingredients and quantity_sum > 0:
             order = Order.objects.create()
             for obj in dish_ingredients:
                 OrderIngredient.objects.create(order=order, ingredient=obj.ingredient, quantity=obj.quantity)
             return redirect('foodprod:order_update', pk=order.pk)
         else:
-            raise ValidationError("Total quantity must be above 0", code='invalid')
+            return redirect('foodprod:index')
 
 
 class OrderUpdateView(UpdateView):
