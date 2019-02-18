@@ -4,7 +4,6 @@ from django.shortcuts import redirect
 from .forms import DishIngredientFormSet, OrderIngredientFormSet
 from django.db.models import Q, Sum
 from django.urls import reverse_lazy
-from django.core.exceptions import ValidationError
 from .models import Dish, Ingredient, Order, DishIngredient, OrderIngredient
 
 

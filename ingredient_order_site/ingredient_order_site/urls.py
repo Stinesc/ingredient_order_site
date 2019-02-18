@@ -19,6 +19,7 @@ from django.shortcuts import redirect
 
 urlpatterns = [
     path('', lambda request: redirect('foodprod:index', permanent=False)),
+    path('', include(('registration.urls', 'registration'), namespace='registration')),
     path('admin/', admin.site.urls),
     path('foodprod/', include(('foodprod.urls', 'foodprod'), namespace='foodprod')),
     path('notes/', include(('notes.urls', 'notes'), namespace='notes'))
