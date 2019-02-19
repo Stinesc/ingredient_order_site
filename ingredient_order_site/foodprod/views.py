@@ -171,7 +171,7 @@ class OrderCreateView(LoginRequiredMixin, View):
             return redirect('foodprod:index')
 
 
-class OrderUpdateView(AdminPassesTestMixin, UpdateView):
+class OrderUpdateView(LoginRequiredMixin, UpdateView):
     model = Order
     fields = []
     success_url = reverse_lazy('foodprod:orders')
