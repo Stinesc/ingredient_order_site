@@ -35,9 +35,13 @@
           </tbody>
         </table>
         <div class="row">
-                <a href="{% url 'foodprod:order_create' dish.id%}" type="button" class="ml-2 btn btn-outline-primary btn-sm align-items-center">Order</a>
-                <a href="{% url 'foodprod:dish_update' dish.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
-                <a href="{% url 'foodprod:dish_delete' dish.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">Delete</a>
+            <form method="post" action="{% url 'foodprod:order_create' %}">
+                {% csrf_token %}
+                <input type="hidden" name="dish_id" value="{{ dish.id }}">
+                <input type="submit" class="ml-2 btn btn-outline-primary btn-sm align-items-center" value="Order">
+            </form>
+            <a href="{% url 'foodprod:dish_update' dish.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
+            <a href="{% url 'foodprod:dish_delete' dish.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">Delete</a>
         </div>
     </div>
 {% endblock %}
