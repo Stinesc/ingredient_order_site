@@ -17,4 +17,6 @@ urlpatterns = [
     path('orders/create/', views.OrderCreateView.as_view(), name='order_create'),
     path('orders/update/<int:pk>/', views.OrderUpdateView.as_view(), name='order_update'),
     path('orders/delete/<int:pk>/', views.OrderDeleteView.as_view(), name='order_delete'),
+    path('no_cook_permission/', views.NoCookPermissionView.as_view(), name='no_cook_permission'),
+    path('no_admin_permission/', views.NoAdminPermissionView.as_view(), name='no_admin_permission'),
 ]

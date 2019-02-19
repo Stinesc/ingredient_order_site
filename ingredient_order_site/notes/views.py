@@ -2,6 +2,7 @@ from django.views.generic import FormView, ListView, TemplateView
 from django.contrib.contenttypes.models import ContentType
 from django.apps import apps
 from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import NoteForm
 from .models import NoteItem
 
@@ -10,7 +11,7 @@ class NotesTemplateView(TemplateView):
     template_name = "notes/notes_type_selection.html"
 
 
-class NoteCreateView(FormView):
+class NoteCreateView(LoginRequiredMixin, FormView):
     template_name = 'notes/note_form.html'
     form_class = NoteForm
 
