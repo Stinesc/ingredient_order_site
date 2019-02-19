@@ -8,6 +8,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Dish, Ingredient, Order, DishIngredient, OrderIngredient
 
 
+class CookPassesTestMixin(UserPassesTestMixin):
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def handle_no_permission(self):
+        return redirect('foodprod:no_cook_permission')
+
+
+class AdminPassesTestMixin(UserPassesTestMixin):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def handle_no_permission(self):
+        return redirect('foodprod:no_admin_permission')
+
+
 class NoCookPermissionView(TemplateView):
     template_name = "foodprod/no_cook_permission.html"
 
@@ -35,16 +53,10 @@ class DishDetailView(DetailView):
     model = Dish
 
 
-class DishCreateView(UserPassesTestMixin, CreateView):
+class DishCreateView(CookPassesTestMixin, CreateView):
     model = Dish
     fields = ['name', 'description']
     success_url=reverse_lazy('foodprod:index')
-
-    def test_func(self):
-        return self.request.user.is_staff
-
-    def handle_no_permission(self):
-        return redirect('foodprod:no_cook_permission')
 
     def get_context_data(self, **kwargs):
         context = super(DishCreateView, self).get_context_data(**kwargs)
@@ -69,16 +81,10 @@ class DishCreateView(UserPassesTestMixin, CreateView):
             return super().form_invalid(form)
 
 
-class DishUpdateView(UserPassesTestMixin, UpdateView):
+class DishUpdateView(CookPassesTestMixin, UpdateView):
     model = Dish
     fields = ['name', 'description']
     success_url = reverse_lazy('foodprod:index')
-
-    def test_func(self):
-        return self.request.user.is_staff
-
-    def handle_no_permission(self):
-        return redirect('foodprod:no_cook_permission')
 
     def get_context_data(self, **kwargs):
         context = super(DishUpdateView, self).get_context_data(**kwargs)
@@ -101,15 +107,9 @@ class DishUpdateView(UserPassesTestMixin, UpdateView):
             return super().form_invalid(form)
 
 
-class DishDeleteView(UserPassesTestMixin, DeleteView):
+class DishDeleteView(CookPassesTestMixin, DeleteView):
     model = Dish
     success_url = reverse_lazy('foodprod:index')
-
-    def test_func(self):
-        return self.request.user.is_staff
-
-    def handle_no_permission(self):
-        return redirect('foodprod:no_cook_permission')
 
 
 class IngredientsListView(ListView):
@@ -122,16 +122,10 @@ class IngredientDetailView(DetailView):
     model = Ingredient
 
 
-class IngredientCreateView(UserPassesTestMixin, CreateView):
+class IngredientCreateView(CookPassesTestMixin, CreateView):
     model = Ingredient
     fields = ['name']
     success_url = reverse_lazy('foodprod:ingredients')
-
-    def test_func(self):
-        return self.request.user.is_staff
-
-    def handle_no_permission(self):
-        return redirect('foodprod:no_cook_permission')
 
     def form_valid(self, form):
         ingredient = form.save(commit=False)
@@ -140,27 +134,15 @@ class IngredientCreateView(UserPassesTestMixin, CreateView):
         return super().form_valid(form)
 
 
-class IngredientUpdateView(UserPassesTestMixin, UpdateView):
+class IngredientUpdateView(CookPassesTestMixin, UpdateView):
     model = Ingredient
     fields = ['name']
     success_url = reverse_lazy('foodprod:ingredients')
 
-    def test_func(self):
-        return self.request.user.is_staff
 
-    def handle_no_permission(self):
-        return redirect('foodprod:no_cook_permission')
-
-
-class IngredientDeleteView(UserPassesTestMixin, DeleteView):
+class IngredientDeleteView(CookPassesTestMixin, DeleteView):
     model = Ingredient
     success_url = reverse_lazy('foodprod:ingredients')
-
-    def test_func(self):
-        return self.request.user.is_staff
-
-    def handle_no_permission(self):
-        return redirect('foodprod:no_cook_permission')
 
 
 class OrdersListView(ListView):
@@ -189,16 +171,10 @@ class OrderCreateView(LoginRequiredMixin, View):
             return redirect('foodprod:index')
 
 
-class OrderUpdateView(UserPassesTestMixin, UpdateView):
+class OrderUpdateView(AdminPassesTestMixin, UpdateView):
     model = Order
     fields = []
     success_url = reverse_lazy('foodprod:orders')
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        return redirect('foodprod:no_admin_permission')
 
     def get_context_data(self, **kwargs):
         context = super(OrderUpdateView, self).get_context_data(**kwargs)
@@ -221,12 +197,6 @@ class OrderUpdateView(UserPassesTestMixin, UpdateView):
             return super().form_invalid(form)
 
 
-class OrderDeleteView(UserPassesTestMixin, DeleteView):
+class OrderDeleteView(AdminPassesTestMixin, DeleteView):
     model = Order
     success_url = reverse_lazy('foodprod:orders')
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        return redirect('foodprod:no_admin_permission')
