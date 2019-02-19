@@ -6,6 +6,9 @@
               <p class="media-body pt-3 mb-0 lh-125 text-muted">
                   <strong class="d-block text-gray-dark">{{ object.note.creation_datetime }}</strong>
               </p>
+              <p class="media-body py-2 mb-0 lh-125 text-dark">
+                  <strong class="d-block text-gray-dark">Author: {{ object.note.author.username }}</strong>
+              </p>
               <div class="media pb-3">
                   <p class="media-body pb-3 mb-0 lh-125">
                     <strong class="d-block text-gray-dark">{{ object.note.title }}</strong>

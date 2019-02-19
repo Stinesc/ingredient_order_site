@@ -6,9 +6,15 @@
             {{ object.name }}
         </p>
             <div class="media text-muted pt-3">
-              <p class="media-body pb-3 mb-0 lh-125">
+              <p class="media-body mb-0 lh-125">
                   <strong class="d-block text-gray-dark">Dish description: </strong>
                 <strong class="d-block text-gray-dark">{{ object.description }}</strong>
+              </p>
+            </div>
+            <div class="media text-dark pt-3">
+              <p class="media-body pb-3 mb-0 lh-125">
+                  <strong class="d-block text-gray-dark">Author: </strong>
+                <strong class="d-block text-gray-dark">{{ object.author.username }}</strong>
               </p>
             </div>
             <div class="media text-dark pt-3">

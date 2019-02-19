@@ -4,6 +4,9 @@
         <p class="border-bottom border-gray pb-2 mb-0"><strong class="d-block text-gray-dark">Ingredient name: </strong>
             {{ object.name }}
         </p>
+        <p class="py-2 mb-0"><strong class="d-block text-dark">Author: </strong>
+            {{ object.author.username }}
+        </p>
         <div class="row">
                 <a href="{% url 'foodprod:ingredient_update' ingredient.id %}" type="button" class="mt-2 ml-2 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
                 <a href="{% url 'foodprod:ingredient_delete' ingredient.id %}" type="button" class="mt-2 ml-2 btn btn-outline-danger btn-sm align-items-center">Delete</a>

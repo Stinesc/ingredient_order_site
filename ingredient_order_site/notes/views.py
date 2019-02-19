@@ -21,8 +21,10 @@ class NoteCreateView(FormView):
         cont_obj = model.objects.get(pk=obj_pk)
         form = self.form_class(request.POST)
         if form.is_valid():
-            form_note = form.save()
-            NoteItem.objects.create(content_object=cont_obj, note=form_note)
+            note = form.save(commit=False)
+            note.author = request.user
+            note.save()
+            NoteItem.objects.create(content_object=cont_obj, note=note)
             return redirect('notes:notes')
         else:
             return self.form_invalid(form)

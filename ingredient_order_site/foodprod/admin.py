@@ -3,21 +3,21 @@ from .models import Dish, Ingredient, Order, DishIngredient, OrderIngredient
 
 
 class DishAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
-    list_filter = ('name',)
-    search_fields = ('name',)
+    list_display = ('name', 'description', 'author')
+    list_filter = ('name', 'author')
+    search_fields = ('name', 'author')
 
 
 class IngredientAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    list_filter = ('name',)
-    search_fields = ('name',)
+    list_display = ('name', 'author')
+    list_filter = ('name', 'author')
+    search_fields = ('name', 'author')
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'creation_datetime')
-    list_filter = ('id', 'creation_datetime')
-    search_fields = ('id', 'creation_datetime')
+    list_display = ('id', 'creation_datetime', 'author')
+    list_filter = ('id', 'creation_datetime', 'author')
+    search_fields = ('id', 'creation_datetime', 'author')
 
 
 class DishIngredientAdmin(admin.ModelAdmin):

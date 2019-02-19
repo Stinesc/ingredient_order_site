@@ -40,6 +40,9 @@ class DishCreateView(CreateView):
         return context
 
     def form_valid(self, form):
+        dish = form.save(commit=False)
+        dish.author = self.request.user
+        dish.save()
         context = self.get_context_data(form=form)
         formset = context['dish_ingredient_formset']
         if formset.is_valid():
@@ -97,6 +100,12 @@ class IngredientCreateView(CreateView):
     fields = ['name']
     success_url = reverse_lazy('foodprod:ingredients')
 
+    def form_valid(self, form):
+        ingredient = form.save(commit=False)
+        ingredient.author = self.request.user
+        ingredient.save()
+        return super().form_valid(form)
+
 
 class IngredientUpdateView(UpdateView):
     model = Ingredient
@@ -127,7 +136,7 @@ class OrderCreateView(View):
         dish_ingredients = DishIngredient.objects.filter(dish=dish)
         quantity_sum = dish_ingredients.aggregate(Sum('quantity')).get('quantity__sum', 0.0)
         if dish_ingredients and quantity_sum > 0:
-            order = Order.objects.create()
+            order = Order.objects.create(author=request.user)
             for obj in dish_ingredients:
                 OrderIngredient.objects.create(order=order, ingredient=obj.ingredient, quantity=obj.quantity)
             return redirect('foodprod:order_update', pk=order.pk)
