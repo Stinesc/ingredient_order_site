@@ -14,4 +14,8 @@ app.conf.beat_schedule = {
         'task': 'foodprod.tasks.task_orders_deactivate',
         'schedule': crontab(),
     },
+    'generate-report-every-week': {
+        'task': 'foodprod.tasks.generate_reports',
+        'schedule': crontab(),
+    },
 }
