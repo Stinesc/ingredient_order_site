@@ -29,5 +29,5 @@ def generate_reports(self):
     orders = Order.objects.filter(creation_datetime__gte=timezone.now()-timezone.timedelta(days=7))
     if orders:
         template = Template(REPORT_TEMPLATE)
-        with open('report.txt', 'a') as f:
+        with open('reports/report.txt', 'a') as f:
             f.write(template.render(context=Context({'orders': orders})))
