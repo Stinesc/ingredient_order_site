@@ -66,7 +66,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{% url 'foodprod:index' %}" method="GET">
-            <input required class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+            <input required class="form-control mr-sm-2" type="text" placeholder="{% trans "Search" %}" aria-label="Search"
                    name="search_query" value="{{ search_query }}">
             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
         </form>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-22 19:27+0000\n"
+"POT-Creation-Date: 2019-02-22 19:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,10 +41,11 @@ msgstr "Ингредиент"
 #: foodprod/templates/foodprod/dish.html:17
 #: foodprod/templates/foodprod/ingredient.html:8
 #: foodprod/templates/foodprod/order.html:17
+#: notes/templates/notes/notes.html:11
 msgid "Author"
 msgstr "Автор"
 
-#: foodprod/models.py:35
+#: foodprod/models.py:35 notes/models.py:11
 msgid "Creation datetime"
 msgstr "Дата и время создания"
 
@@ -74,6 +75,7 @@ msgid "Ingredient order"
 msgstr "Заказ ингредиентов"
 
 #: foodprod/templates/foodprod/base.html:62
+#: notes/templates/notes/notes_type_selection.html:10
 msgid "Orders"
 msgstr "Заказы"
 
@@ -81,6 +83,7 @@ msgstr "Заказы"
 msgid "Notes"
 msgstr "Заметки"
 
+#: foodprod/templates/foodprod/base.html:69
 #: foodprod/templates/foodprod/base.html:71
 msgid "Search"
 msgstr "Поиск"
@@ -90,10 +93,12 @@ msgid "Sign out"
 msgstr "Выйти"
 
 #: foodprod/templates/foodprod/base.html:76
+#: registration/templates/registration/login.html:22
 msgid "Sign in"
 msgstr "Войти"
 
 #: foodprod/templates/foodprod/base.html:77
+#: registration/templates/registration/register.html:11
 msgid "Register"
 msgstr "Регистация"
 
@@ -157,6 +162,7 @@ msgstr "Выберите ингридиенты и количество"
 #: foodprod/templates/foodprod/dish_form.html:13
 #: foodprod/templates/foodprod/ingredient_form.html:10
 #: foodprod/templates/foodprod/order_form.html:10
+#: notes/templates/notes/note_form.html:10
 msgid "Save"
 msgstr "Сохранить"
 
@@ -182,14 +188,14 @@ msgid "Ingredient name"
 msgstr "Ингредиент"
 
 #: foodprod/templates/foodprod/ingredient_confirm_delete.html:8
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "            Are you sure you want to delete ingredient \"%(object)s\"?\n"
 "            "
 msgstr ""
 "\n"
-"                Вы уверенны что хотите удалить блюдо '%(object)s'?\n"
+"                Вы уверенны что хотите удалить ингридиент '%(object)s'?\n"
 "            "
 
 #: foodprod/templates/foodprod/ingredients.html:6
@@ -216,10 +222,8 @@ msgstr ""
 "ингридиенты"
 
 #: foodprod/templates/foodprod/order.html:6
-#, fuzzy
-#| msgid "Order"
 msgid "Order id"
-msgstr "Заказать"
+msgstr "Номер"
 
 #: foodprod/templates/foodprod/order.html:11
 msgid "Order creation date"
@@ -227,27 +231,23 @@ msgstr "Дата и время создания"
 
 #: foodprod/templates/foodprod/order.html:46
 #: foodprod/templates/foodprod/orders.html:14
-#, fuzzy
-#| msgid "Is active"
 msgid "Active"
-msgstr "Является активным"
+msgstr "Активный"
 
 #: foodprod/templates/foodprod/order.html:48
 #: foodprod/templates/foodprod/orders.html:16
-#, fuzzy
-#| msgid "Is active"
 msgid "Inactive"
-msgstr "Является активным"
+msgstr "Не активный"
 
 #: foodprod/templates/foodprod/order_confirm_delete.html:8
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "            Are you sure you want to delete order \"%(object)s\"?\n"
 "            "
 msgstr ""
 "\n"
-"                Вы уверенны что хотите удалить блюдо '%(object)s'?\n"
+"                Вы уверенны что хотите удалить заказ '%(object)s'?\n"
 "            "
 
 #: foodprod/templates/foodprod/orders.html:5
@@ -258,6 +258,34 @@ msgstr "Список заказов"
 msgid "No orders yet."
 msgstr "Заказов пока нет."
 
+#: notes/models.py:9
+msgid "Title"
+msgstr "Заголовок"
+
+#: notes/models.py:10
+msgid "Body"
+msgstr "Основная часть"
+
+#: notes/templates/notes/notes.html:5
+msgid "List of notes"
+msgstr "Список заметок"
+
+#: notes/templates/notes/notes.html:22
+msgid "No notes yet."
+msgstr "Заметок пока нет."
+
+#: notes/templates/notes/notes_type_selection.html:6
+msgid "Select type"
+msgstr "Выбирите тип"
+
+#: notes/templates/notes/notes_type_selection.html:7
+msgid "Select entity type to see the list of notes"
+msgstr "Выбирите тип сущности чтобы увидеть список заметок"
+
+#: notes/templates/notes/notes_type_selection.html:9
+msgid "Dishes"
+msgstr "Блюда"
+
 #: registration/forms.py:11
 msgid "I'm a cook"
 msgstr "Я повар"
@@ -265,6 +293,22 @@ msgstr "Я повар"
 #: registration/forms.py:12
 msgid "Determines whether the user can create dishes."
 msgstr "Определяет, может ли пользователь добавлять блюда"
+
+#: registration/templates/registration/login.html:5
+msgid "Your username and password didn't match. Please try again."
+msgstr "Ваш ник или пароль не найден. Попробуйте еще раз."
+
+#: registration/templates/registration/login.html:12
+msgid "Please login to see this page."
+msgstr "Пожалуйста войдите, что-бы увидеть эту страницу"
+
+#: registration/templates/registration/login.html:18
+msgid "Please sign in"
+msgstr "Пожалуйста войдите"
+
+#: registration/templates/registration/register.html:6
+msgid "Please register"
+msgstr "Пожалуйста зарегистрируйтесь"
 
 #~ msgid "ingredient"
 #~ msgstr "Ингредиент"

@@ -1,12 +1,13 @@
 {% extends "foodprod/base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="container">
     <div class="mt-2 text-center center-block">
-        <h2>Select type</h2>
-              <p class="lead text-muted">Select entity type to see the list of notes</p>
+        <h2>{% trans "Select type" %}</h2>
+              <p class="lead text-muted">{% trans "Select entity type to see the list of notes" %}</p>
               <p>
-                <a href="{% url 'notes:notes_by_type' 'dish'%}" class="btn btn-outline-primary m-2">Dishes</a>
-                <a href="{% url 'notes:notes_by_type' 'order'%}" class="btn btn-outline-secondary m-2">Orders</a>
+                <a href="{% url 'notes:notes_by_type' 'dish'%}" class="btn btn-outline-primary m-2">{% trans "Dishes" %}</a>
+                <a href="{% url 'notes:notes_by_type' 'order'%}" class="btn btn-outline-secondary m-2">{% trans "Orders" %}</a>
               </p>
     </div>
 </div>

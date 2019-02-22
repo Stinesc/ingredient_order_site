@@ -6,9 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Note(models.Model):
-    title = models.CharField(max_length=32)
-    body = models.TextField()
-    creation_datetime = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(verbose_name=_('Title'), max_length=32)
+    body = models.TextField(verbose_name=_('Body'))
+    creation_datetime = models.DateTimeField(verbose_name=_('Creation datetime'), auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
