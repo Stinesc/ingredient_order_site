@@ -177,7 +177,7 @@ msgstr "Добавить блюдо"
 #: foodprod/templates/foodprod/index.html:17
 #: foodprod/templates/foodprod/orders.html:20
 msgid "Add note"
-msgstr "Довавить заметку"
+msgstr "Добавить заметку"
 
 #: foodprod/templates/foodprod/index.html:31
 msgid "No dishes yet."

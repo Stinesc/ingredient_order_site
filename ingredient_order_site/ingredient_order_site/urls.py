@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include(('registration.urls', 'registration'), namespace='registration')),
     path('admin/', admin.site.urls),
     path('foodprod/', include(('foodprod.urls', 'foodprod'), namespace='foodprod')),
-    path('notes/', include(('notes.urls', 'notes'), namespace='notes'))
+    path('notes/', include(('notes.urls', 'notes'), namespace='notes')),
+    path('i18n/', include('django.conf.urls.i18n'))
 ]

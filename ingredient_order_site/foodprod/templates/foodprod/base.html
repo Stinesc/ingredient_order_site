@@ -76,6 +76,20 @@
             <a href="{% url 'registration:login'%}" type="button" class="ml-4 btn btn-outline-dark align-items-center">{% trans "Sign in" %}</a>
             <a href="{% url 'registration:register'%}" type="button" class="ml-2 btn btn-outline-dark align-items-center">{% trans "Register" %}</a>
         {% endif %}
+        <form class="form-inline m-3 my-lg-0" action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ redirect_to }}" />
+            <select class="form-control" name="language" onchange="this.form.submit()">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
     </div>
 </nav>
 
