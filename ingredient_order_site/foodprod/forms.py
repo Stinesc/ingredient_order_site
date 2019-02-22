@@ -2,6 +2,7 @@ from django.forms.models import inlineformset_factory
 from django.forms import BaseInlineFormSet
 from .models import Dish, Order, DishIngredient, OrderIngredient
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 
 class BaseIngredientFormSet(BaseInlineFormSet):
@@ -9,7 +10,7 @@ class BaseIngredientFormSet(BaseInlineFormSet):
         super().clean()
         total_quantity = sum(f.cleaned_data['quantity'] for f in self.forms if f.cleaned_data.get('quantity') is not None)
         if total_quantity <= 0:
-            raise ValidationError("Total quantity must be above 0", code='invalid')
+            raise ValidationError(_("Total quantity must be above 0", code='invalid'))
 
 
 DishIngredientFormSet = inlineformset_factory(Dish, DishIngredient, fields=['ingredient', 'quantity'], exclude=[],

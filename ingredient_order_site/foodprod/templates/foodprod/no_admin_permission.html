@@ -1,9 +1,10 @@
 {% extends "foodprod/base.html" %}
+{% load i18n %}
 {% block content %}
 <div class="container">
     <div class="mt-2 text-center center-block">
-        <h2>Sorry...</h2>
-        <p class="lead text-muted">Only admins can update and delete orders.</p>
+        <h2>{% trans "Sorry" %}...</h2>
+        <p class="lead text-muted">{% trans Only admins can update and delete orders" %}.</p>
     </div>
 </div>
 {% endblock %}

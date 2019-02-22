@@ -38,7 +38,7 @@ class DishDetailView(DetailView):
 class DishCreateView(UserPassesTestMixin, CreateView):
     model = Dish
     fields = ['name', 'description']
-    success_url=reverse_lazy('foodprod:index')
+    success_url = reverse_lazy('foodprod:index')
 
     def test_func(self):
         return self.request.user.is_staff

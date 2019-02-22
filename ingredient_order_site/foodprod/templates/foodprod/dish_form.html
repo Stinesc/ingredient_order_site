@@ -1,14 +1,15 @@
 {% extends "foodprod/base.html" %}
+{% load i18n %}
 {% block content %}
 <form method="post">
     {% csrf_token %}
     <table class="my-3">
         {{ form.as_table }}
     </table>
-    <p>Select ingredients and quantity</p>
+    <p>{% trans "Select ingredients and quantity" %}</p>
     <table class="my-3">
         {{ dish_ingredient_formset.as_table }}
     </table>
-    <input class="btn btn-primary" type="submit" value="Save">
+    <input class="btn btn-primary" type="submit" value="{% trans "Save" %}">
 </form>
 {% endblock %}

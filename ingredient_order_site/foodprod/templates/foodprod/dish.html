@@ -1,33 +1,34 @@
 {% extends "foodprod/base.html" %}
+{% load i18n %}
 {% block content %}
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <p class="border-bottom border-gray pb-2 mb-0">
-            <strong class="d-block text-gray-dark">Dish name: </strong>
+            <strong class="d-block text-gray-dark">{% trans "Dish name" %}: </strong>
             {{ object.name }}
         </p>
             <div class="media text-muted pt-3">
               <p class="media-body mb-0 lh-125">
-                  <strong class="d-block text-gray-dark">Dish description: </strong>
+                  <strong class="d-block text-gray-dark">{% trans "Dish description" %}: </strong>
                 <strong class="d-block text-gray-dark">{{ object.description }}</strong>
               </p>
             </div>
             <div class="media text-dark pt-3">
               <p class="media-body pb-3 mb-0 lh-125">
-                  <strong class="d-block text-gray-dark">Author: </strong>
+                  <strong class="d-block text-gray-dark">{% trans "Author" %}: </strong>
                 <strong class="d-block text-gray-dark">{{ object.author.username }}</strong>
               </p>
             </div>
             <div class="media text-dark pt-3">
               <p class="media-body pb-3 mb-0 lh-125">
-                <strong class="d-block text-gray-dark">Ingredients:</strong>
+                <strong class="d-block text-gray-dark">{% trans "Ingredients" %}:</strong>
               </p>
             </div>
         <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Ingredient</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">{% trans "Ingredient" %}</th>
+              <th scope="col">{% trans "Quantity" %}</th>
             </tr>
           </thead>
           <tbody>
@@ -44,10 +45,10 @@
             <form method="post" action="{% url 'foodprod:order_create' %}">
                 {% csrf_token %}
                 <input type="hidden" name="dish_id" value="{{ dish.id }}">
-                <input type="submit" class="ml-2 btn btn-outline-primary btn-sm align-items-center" value="Order">
+                <input type="submit" class="ml-2 btn btn-outline-primary btn-sm align-items-center" value="{% trans "Order" %}">
             </form>
-            <a href="{% url 'foodprod:dish_update' dish.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">Edit</a>
-            <a href="{% url 'foodprod:dish_delete' dish.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">Delete</a>
+            <a href="{% url 'foodprod:dish_update' dish.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">{% trans "Edit" %}</a>
+            <a href="{% url 'foodprod:dish_delete' dish.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">{% trans "Delete" %}</a>
         </div>
     </div>
 {% endblock %}
