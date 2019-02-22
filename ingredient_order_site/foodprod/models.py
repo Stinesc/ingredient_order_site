@@ -32,6 +32,7 @@ class Ingredient(models.Model):
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     creation_datetime = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     ingredients = models.ManyToManyField('Ingredient', through='OrderIngredient')
     notes = GenericRelation(NoteItem)

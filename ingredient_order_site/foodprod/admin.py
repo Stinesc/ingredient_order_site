@@ -15,8 +15,8 @@ class IngredientAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'creation_datetime', 'author')
-    list_filter = ('id', 'creation_datetime', 'author')
+    list_display = ('id', 'creation_datetime', 'author', 'is_active')
+    list_filter = ('id', 'creation_datetime', 'author', 'is_active')
     search_fields = ('id', 'creation_datetime', 'author')
 
 
