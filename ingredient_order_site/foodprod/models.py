@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
-from notes.models import NoteItem
+from notes.models import NoteItem, Note
 from django.utils.translation import ugettext as _
+from django.contrib.contenttypes.models import ContentType
 
 
 class Dish(models.Model):
@@ -10,10 +11,15 @@ class Dish(models.Model):
     description = models.CharField(verbose_name=_('Description'), max_length=256, blank=True, default="")
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     ingredients = models.ManyToManyField('Ingredient', verbose_name=_('Ingredient'), through='DishIngredient')
-    notes = GenericRelation(NoteItem)
+    note_items = GenericRelation(NoteItem)
+
+    def notes(self):
+        return Note.objects.filter(
+            noteitem__object_id=self.id, noteitem__content_type=ContentType.objects.get_for_model(Dish)
+        )
 
     def __str__(self):
-        return _(self.name)
+        return self.name
 
     class Meta:
         ordering = ['name']
@@ -24,7 +30,7 @@ class Ingredient(models.Model):
     author = models.ForeignKey(User, verbose_name=_('Author'), on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return _(self.name)
+        return self.name
 
     class Meta:
         ordering = ['name']
@@ -39,7 +45,7 @@ class Order(models.Model):
     notes = GenericRelation(NoteItem)
 
     def __str__(self):
-        return _(str(self.id))
+        return self.id
 
     class Meta:
         ordering = ['-creation_datetime']
