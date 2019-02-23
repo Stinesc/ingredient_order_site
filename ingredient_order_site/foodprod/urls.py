@@ -1,7 +1,14 @@
-from django.urls import path
+from django.urls import path, include, re_path
 from . import views
+from . import api_views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('dishes', api_views.DishViewSet)
+router.register('ingredients', api_views.IngredientViewSet)
 
 urlpatterns = [
+    re_path(r'^', include(router.urls)),
     path('', views.IndexView.as_view(), name='index'),
     path('<int:pk>/', views.DishDetailView.as_view(), name='dish'),
     path('create/', views.DishCreateView.as_view(), name='dish_create'),
