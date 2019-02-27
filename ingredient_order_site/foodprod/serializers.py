@@ -1,9 +1,13 @@
 from rest_framework import serializers
+from notes.models import Note
+from .models import Dish, Ingredient, Order
 
-from notes.models import Note, NoteItem
-from .models import Dish, Ingredient
 
-from notes.serializers import NoteSerializer
+class NoteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Note
+        fields = ('title', 'body', 'creation_datetime', 'author')
 
 
 class DishSerializer(serializers.ModelSerializer):

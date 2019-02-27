@@ -16,6 +16,6 @@ app.conf.beat_schedule = {
     },
     'generate-report-every-week': {
         'task': 'foodprod.tasks.generate_reports',
-        'schedule': crontab(),
+        'schedule': crontab(day_of_week=1),
     },
 }
