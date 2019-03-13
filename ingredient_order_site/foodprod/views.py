@@ -6,6 +6,7 @@ from django.db.models import Q, Sum
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Dish, Ingredient, Order, DishIngredient, OrderIngredient
+from rest_framework.authtoken.models import Token
 
 
 class NoCookPermissionView(TemplateView):
@@ -19,6 +20,14 @@ class NoAdminPermissionView(TemplateView):
 class IndexView(ListView):
     template_name = "foodprod/index.html"
     model = Dish
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        token = None
+        if self.request.user.is_authenticated:
+            token, created = Token.objects.get_or_create(user=self.request.user)
+        context.update(token=token)
+        return context
 
     def get_queryset(self):
         search_query = self.request.GET.get('search_query')

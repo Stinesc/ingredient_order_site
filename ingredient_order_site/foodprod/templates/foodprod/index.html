@@ -1,6 +1,20 @@
 {% extends "foodprod/base.html" %}
 {% load i18n %}
 {% block content %}
+    {% if token %}
+      <script type="text/javascript">
+        $(function() {
+          let url = "ws://" + document.location.host + "/socket_consumer/?token={{ token }}"
+          let web_socket = new WebSocket(url);
+          web_socket.onmessage = function(message) {
+            var data = message.data
+            if (data == "reload"){
+              window.location.reload();
+            }
+          }
+        });
+      </script>
+    {% endif %}
     <div class="my-3 p-3 bg-white rounded box-shadow">
         <h6 class="border-bottom border-gray pb-2 mb-0">{% trans "List of dishes" %}</h6>
         <div class="row">
