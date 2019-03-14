@@ -7,9 +7,10 @@
           let url = "ws://" + document.location.host + "/socket_consumer/?token={{ token }}"
           let web_socket = new WebSocket(url);
           web_socket.onmessage = function(message) {
-            var data = message.data
-            if (data == "reload"){
-              window.location.reload();
+            var data = JSON.parse(message.data);
+            console.log(data);
+            if (data["message"] == "reload"){
+              location.reload();
             }
           }
         });

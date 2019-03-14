@@ -13,6 +13,8 @@ class SocketConsumer(WebsocketConsumer):
     def disconnect(self, close_code):
         async_to_sync(self.channel_layer.group_discard)("foodprod", self.channel_name)
 
+    def foodprod_message(self, event):
+        self.send(text_data=event['text'])
 
 def ws_reload_page():
     layer = get_channel_layer()
@@ -20,6 +22,6 @@ def ws_reload_page():
         "foodprod",
         {
             "type": "foodprod.message",
-            "text": json.dumps({'message': 'reloading'}),
+            "text": json.dumps({'message': 'reload'}),
         }
 )

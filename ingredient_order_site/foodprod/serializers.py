@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from notes.models import Note
 from .models import Dish, Ingredient, Order, DishIngredient, OrderIngredient
+from .consumers import ws_reload_page
 
 
 class NoteSerializer(serializers.ModelSerializer):
@@ -38,6 +39,7 @@ class DishSerializer(serializers.ModelSerializer):
                                    author=validated_data.pop('author'))
         for track_data in ingredients_data:
             DishIngredient.objects.create(dish=dish, **track_data)
+        ws_reload_page()
         return dish
 
 
