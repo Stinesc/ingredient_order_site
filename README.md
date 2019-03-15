@@ -21,29 +21,11 @@ CREATE USER ingredient_order_site_db_admin WITH PASSWORD '123';
 ALTER USER ingredient_order_site_db_admin CREATEDB; (for tests)
 CTRL + D
 ```
-#### Create, activate virtual environment and install packages:
+#### Run with Docker:
 ```bash
-virtualenv -p python3 env
-source env/bin/activate
-pip3 install -r requirements.txt
-```
-#### Make migrations and migrate:
-```bash
-python3 manage.py makemigrations
-python3 manage.py migrate
-```
-#### Create superuser:
-```bash
-python3 manage.py createsuperuser
-```
-#### Run Celery (in a separate terminal):
-```bash
-sudo apt-get install redis
-celery -A ingredient_order_site worker -l info -B
-```
-#### Run server:
-```bash
-python3 manage.py runserver
+sudo docker-compose run web python3 manage.py migrate
+sudo docker-compose run web python3 manage.py createsuperuser
+sudo docker-compose up
 ```
 #### Run tests:
 ```bash
