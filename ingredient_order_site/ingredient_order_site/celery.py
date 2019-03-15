@@ -4,7 +4,9 @@ from celery.schedules import crontab
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ingredient_order_site.settings')
 
-app = Celery('ingredient_order_site')
+app = Celery('ingredient_order_site',
+             backend=os.getenv('CELERY_BACKEND', 'redis://redis:6379/0'),
+             broker=os.getenv('CELERY_BROKER', 'redis://redis:6379/0'))
 app.config_from_object('django.conf:settings')
 
 app.autodiscover_tasks()

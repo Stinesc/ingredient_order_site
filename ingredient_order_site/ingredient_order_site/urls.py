@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', lambda request: redirect('foodprod:index', permanent=False)),
@@ -25,3 +26,5 @@ urlpatterns = [
     path('notes/', include(('notes.urls', 'notes'), namespace='notes')),
     path('i18n/', include('django.conf.urls.i18n'))
 ]
+
+urlpatterns += staticfiles_urlpatterns()

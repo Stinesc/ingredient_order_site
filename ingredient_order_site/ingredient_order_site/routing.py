@@ -1,13 +1,14 @@
 from channels.routing import ProtocolTypeRouter, URLRouter
-from foodprod.consumers import SocketConsumer
-from django.urls import path
-from foodprod.token_auth import TokenAuthMiddleware
+from channels.auth import AuthMiddlewareStack
 
+import foodprod.routing as test_routing
+from foodprod.token_auth import TokenAuthMiddlewareStack
 
 application = ProtocolTypeRouter({
-    'websocket': TokenAuthMiddleware(
-        URLRouter([
-            path('socket_consumer/', SocketConsumer)
-        ]),
-    ),
+    # (http->django views is added by default)
+    "websocket": TokenAuthMiddlewareStack(
+        URLRouter(
+            test_routing.websocket_urlpatterns
+        )
+    )
 })

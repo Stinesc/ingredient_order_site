@@ -4,7 +4,7 @@
     {% if token %}
       <script type="text/javascript">
         $(function() {
-          let url = "ws://" + document.location.host + "/socket_consumer/?token={{ token }}"
+          let url = "ws://" + window.location.host + "/ws/socket_consumer/?token={{ token }}"
           let web_socket = new WebSocket(url);
           web_socket.onmessage = function(message) {
             var data = JSON.parse(message.data);

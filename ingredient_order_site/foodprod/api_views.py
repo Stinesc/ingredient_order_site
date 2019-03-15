@@ -15,16 +15,16 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
 class DishViewSet(viewsets.ModelViewSet):
     queryset = Dish.objects.all()
     serializer_class = DishSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
 
 
 class IngredientViewSet(viewsets.ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly)
