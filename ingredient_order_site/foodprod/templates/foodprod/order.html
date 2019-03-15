@@ -1,0 +1,58 @@
+{% extends "foodprod/base.html" %}
+{% load i18n %}
+{% block content %}
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <p class="border-bottom border-gray pb-2 mb-0">
+            <strong class="d-block text-gray-dark">{% trans "Order id" %}: </strong>
+            {{ object.id }}
+        </p>
+            <div class="media text-muted pt-3">
+              <p class="media-body mb-0 lh-125">
+                  <strong class="d-block text-gray-dark">{% trans "Order creation date" %}: </strong>
+                <strong class="d-block text-gray-dark">{{ object.creation_datetime }}</strong>
+              </p>
+            </div>
+            <div class="media text-dark pt-3">
+              <p class="media-body pb-3 mb-0 lh-125">
+                  <strong class="d-block text-gray-dark">{% trans "Author" %}: </strong>
+                <strong class="d-block text-gray-dark">{{ object.author.username }}</strong>
+              </p>
+            </div>
+            <div class="media text-dark pt-3">
+              <p class="media-body pb-3 mb-0 lh-125">
+                <strong class="d-block text-gray-dark">{% trans "Ingredients" %}:</strong>
+              </p>
+            </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">{% trans "Ingredient" %}</th>
+              <th scope="col">{% trans "Quantity" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+        {% for orderingredient in object.orderingredient_set.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ orderingredient.ingredient.name }}</td>
+                <td>{{ orderingredient.quantity }}</td>
+            </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+        <div class="row">
+                {% if object.is_active %}
+                    <span class="m-2 badge badge-pill badge-success">{% trans "Active" %}</span>
+                {% else %}
+                    <span class="m-2 badge badge-pill badge-danger">{% trans "Inactive" %}</span>
+                {% endif %}
+        </div>
+        <div class="row">
+                <a href="{% url 'foodprod:order_update' object.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">{% trans "Edit" %}</a>
+                <a href="{% url 'foodprod:order_delete' object.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">{% trans "Delete" %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+

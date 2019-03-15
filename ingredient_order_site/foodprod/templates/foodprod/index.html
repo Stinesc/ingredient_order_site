@@ -1,0 +1,52 @@
+{% extends "foodprod/base.html" %}
+{% load i18n %}
+{% block content %}
+    {% if token %}
+      <script type="text/javascript">
+        $(function() {
+          let url = "ws://" + window.location.host + "/ws/socket_consumer/?token={{ token }}"
+          let web_socket = new WebSocket(url);
+          web_socket.onmessage = function(message) {
+            var data = JSON.parse(message.data);
+            if (data["message"] == "reload"){
+              location.reload();
+            }
+          }
+        });
+      </script>
+    {% endif %}
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h6 class="border-bottom border-gray pb-2 mb-0">{% trans "List of dishes" %}</h6>
+        <div class="row">
+            <a href="{% url 'foodprod:dish_create' %}" type="button" class="mt-2 mx-2 btn btn-outline-success btn-sm align-items-center">{% trans "Add dish" %}</a>
+        </div>
+        {% for dish in object_list %}
+              <div class="media text-muted pt-3">
+                  <p class="media-body pb-3 mb-0 lh-125">
+                    <a href="{% url 'foodprod:dish' dish.id%}" class="d-block text-gray-dark">{{ dish.name }}</a>
+                    {{ dish.description }}
+                  </p>
+              </div>
+              <div class="row">
+                  <a href="{% url 'notes:note_create' type='dish' pk=dish.id%}" type="button" class="mb-3 ml-2 btn btn-outline-warning btn-sm align-items-center">{% trans "Add note" %}</a>
+              </div>
+              <div class="row">
+                  <form method="post" action="{% url 'foodprod:order_create' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="dish_id" value="{{ dish.id }}">
+                    <input type="submit" class="ml-2 btn btn-outline-primary btn-sm align-items-center" value="{% trans "Order" %}">
+                  </form>
+                  <a href="{% url 'foodprod:dish_update' dish.id%}" type="button" class="ml-2 btn btn-outline-secondary btn-sm align-items-center">{% trans "Edit" %}</a>
+                  <a href="{% url 'foodprod:dish_delete' dish.id%}" type="button" class="ml-2 btn btn-outline-danger btn-sm align-items-center">{% trans "Delete" %}</a>
+              </div>
+        {% empty %}
+            <div class="media text-muted pt-3">
+              <p class="media-body pb-3 mb-0 lh-125">
+                <strong class="d-block text-gray-dark">{% trans "No dishes yet." %}</strong>
+              </p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

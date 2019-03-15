@@ -1,0 +1,64 @@
+version: '3'
+services:
+
+  web:
+    build: .
+    command: gunicorn -w 2 ingredient_order_site.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - CELERY_BACKEND=redis://redis:6379/0
+      - CELERY_BROKER=redis://redis:6379/0
+      - CHANNELS_BACKEND=redis://redis:6379/1
+
+    depends_on:
+      - db
+    links:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=ingredient_order_site_db
+      - POSTGRES_USER=ingredient_order_site_db_admin
+      - POSTGRES_PASSWORD=123
+
+  celery:
+    build: .
+    command: celery -A ingredient_order_site worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
+  worker_channels:
+    build: .
+    command: python3 manage.py runworker channels
+    volumes:
+      - .:/app
+    links:
+      - redis
+
+  channels:
+    build: .
+    command: daphne -b 0.0.0.0 -p 8001 ingredient_order_site.asgi:application
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+    links:
+    - redis
+
+volumes:
+  postgres_data:

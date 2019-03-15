@@ -1,0 +1,14 @@
+{% extends "foodprod/base.html" %}
+{% load i18n %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.errors }}
+        <table class="my-3">
+        {{ form.as_table }}
+        </table>
+        <input class="btn btn-primary" type="submit" value="{% trans "Save" %}">
+    </form>
+{% endblock %}
+
+

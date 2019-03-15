@@ -1,0 +1,317 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-22 19:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: foodprod/forms.py:13
+msgid "Total quantity must be above 0"
+msgstr "Общее количество должно быть больше 0"
+
+#: foodprod/models.py:9 foodprod/models.py:23
+msgid "Name"
+msgstr "Имя"
+
+#: foodprod/models.py:10
+msgid "Description"
+msgstr "Описание"
+
+#: foodprod/models.py:12 foodprod/templates/foodprod/dish.html:30
+#: foodprod/templates/foodprod/order.html:30
+msgid "Ingredient"
+msgstr "Ингредиент"
+
+#: foodprod/models.py:24 foodprod/models.py:37
+#: foodprod/templates/foodprod/dish.html:17
+#: foodprod/templates/foodprod/ingredient.html:8
+#: foodprod/templates/foodprod/order.html:17
+#: notes/templates/notes/notes.html:11
+msgid "Author"
+msgstr "Автор"
+
+#: foodprod/models.py:35 notes/models.py:11
+msgid "Creation datetime"
+msgstr "Дата и время создания"
+
+#: foodprod/models.py:36
+msgid "Is active"
+msgstr "Является активным"
+
+#: foodprod/models.py:49
+msgid "Dish"
+msgstr "Блюдо"
+
+#: foodprod/models.py:52 foodprod/models.py:62
+#: foodprod/templates/foodprod/dish.html:31
+#: foodprod/templates/foodprod/order.html:31
+msgid "Quantity"
+msgstr "Количество"
+
+#: foodprod/models.py:60 foodprod/templates/foodprod/base.html:59
+#: foodprod/templates/foodprod/dish.html:23
+#: foodprod/templates/foodprod/order.html:23
+msgid "Ingredients"
+msgstr "Ингредиенты"
+
+#: foodprod/templates/foodprod/base.html:9
+#: foodprod/templates/foodprod/base.html:50
+msgid "Ingredient order"
+msgstr "Заказ ингредиентов"
+
+#: foodprod/templates/foodprod/base.html:62
+#: notes/templates/notes/notes_type_selection.html:10
+msgid "Orders"
+msgstr "Заказы"
+
+#: foodprod/templates/foodprod/base.html:65
+msgid "Notes"
+msgstr "Заметки"
+
+#: foodprod/templates/foodprod/base.html:69
+#: foodprod/templates/foodprod/base.html:71
+msgid "Search"
+msgstr "Поиск"
+
+#: foodprod/templates/foodprod/base.html:74
+msgid "Sign out"
+msgstr "Выйти"
+
+#: foodprod/templates/foodprod/base.html:76
+#: registration/templates/registration/login.html:22
+msgid "Sign in"
+msgstr "Войти"
+
+#: foodprod/templates/foodprod/base.html:77
+#: registration/templates/registration/register.html:11
+msgid "Register"
+msgstr "Регистация"
+
+#: foodprod/templates/foodprod/base.html:98
+msgid "Igor Limarev"
+msgstr "Игорь Лимарев"
+
+#: foodprod/templates/foodprod/dish.html:6
+msgid "Dish name"
+msgstr "Название блюда"
+
+#: foodprod/templates/foodprod/dish.html:11
+msgid "Dish description"
+msgstr "Описание блюда"
+
+#: foodprod/templates/foodprod/dish.html:48
+#: foodprod/templates/foodprod/index.html:23
+msgid "Order"
+msgstr "Заказать"
+
+#: foodprod/templates/foodprod/dish.html:50
+#: foodprod/templates/foodprod/index.html:25
+#: foodprod/templates/foodprod/ingredient.html:12
+#: foodprod/templates/foodprod/ingredients.html:18
+#: foodprod/templates/foodprod/order.html:52
+#: foodprod/templates/foodprod/orders.html:23
+msgid "Edit"
+msgstr "Изменить"
+
+#: foodprod/templates/foodprod/dish.html:51
+#: foodprod/templates/foodprod/index.html:26
+#: foodprod/templates/foodprod/ingredient.html:13
+#: foodprod/templates/foodprod/ingredients.html:19
+#: foodprod/templates/foodprod/order.html:53
+#: foodprod/templates/foodprod/orders.html:24
+msgid "Delete"
+msgstr "Удалить"
+
+#: foodprod/templates/foodprod/dish_confirm_delete.html:8
+#, python-format
+msgid ""
+"\n"
+"                Are you sure you want to delete dish '%(object)s'?\n"
+"            "
+msgstr ""
+"\n"
+"                Вы уверенны что хотите удалить блюдо '%(object)s'?\n"
+"            "
+
+#: foodprod/templates/foodprod/dish_confirm_delete.html:12
+#: foodprod/templates/foodprod/ingredient_confirm_delete.html:12
+#: foodprod/templates/foodprod/order_confirm_delete.html:12
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: foodprod/templates/foodprod/dish_form.html:9
+#: foodprod/templates/foodprod/order_form.html:6
+msgid "Select ingredients and quantity"
+msgstr "Выберите ингридиенты и количество"
+
+#: foodprod/templates/foodprod/dish_form.html:13
+#: foodprod/templates/foodprod/ingredient_form.html:10
+#: foodprod/templates/foodprod/order_form.html:10
+#: notes/templates/notes/note_form.html:10
+msgid "Save"
+msgstr "Сохранить"
+
+#: foodprod/templates/foodprod/index.html:5
+msgid "List of dishes"
+msgstr "Список блюд"
+
+#: foodprod/templates/foodprod/index.html:7
+msgid "Add dish"
+msgstr "Добавить блюдо"
+
+#: foodprod/templates/foodprod/index.html:17
+#: foodprod/templates/foodprod/orders.html:20
+msgid "Add note"
+msgstr "Добавить заметку"
+
+#: foodprod/templates/foodprod/index.html:31
+msgid "No dishes yet."
+msgstr "Блюд пока нету."
+
+#: foodprod/templates/foodprod/ingredient.html:5
+msgid "Ingredient name"
+msgstr "Ингредиент"
+
+#: foodprod/templates/foodprod/ingredient_confirm_delete.html:8
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to delete ingredient \"%(object)s\"?\n"
+"            "
+msgstr ""
+"\n"
+"                Вы уверенны что хотите удалить ингридиент '%(object)s'?\n"
+"            "
+
+#: foodprod/templates/foodprod/ingredients.html:6
+msgid "List of ingredients"
+msgstr "Список ингредиентов"
+
+#: foodprod/templates/foodprod/ingredients.html:9
+msgid "Add ingredient"
+msgstr "Добавить ингредиент"
+
+#: foodprod/templates/foodprod/ingredients.html:24
+msgid "No ingredients yet."
+msgstr "Ингредиентов пока нету."
+
+#: foodprod/templates/foodprod/no_admin_permission.html:6
+#: foodprod/templates/foodprod/no_cook_permission.html:6
+msgid "Sorry"
+msgstr "Извините"
+
+#: foodprod/templates/foodprod/no_cook_permission.html:7
+msgid "Only cooks and admins can add, update and delete dishes and ingredients"
+msgstr ""
+"Только повара и администраторы могут добавлять, изменять и удалять блюда и "
+"ингридиенты"
+
+#: foodprod/templates/foodprod/order.html:6
+msgid "Order id"
+msgstr "Номер"
+
+#: foodprod/templates/foodprod/order.html:11
+msgid "Order creation date"
+msgstr "Дата и время создания"
+
+#: foodprod/templates/foodprod/order.html:46
+#: foodprod/templates/foodprod/orders.html:14
+msgid "Active"
+msgstr "Активный"
+
+#: foodprod/templates/foodprod/order.html:48
+#: foodprod/templates/foodprod/orders.html:16
+msgid "Inactive"
+msgstr "Не активный"
+
+#: foodprod/templates/foodprod/order_confirm_delete.html:8
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to delete order \"%(object)s\"?\n"
+"            "
+msgstr ""
+"\n"
+"                Вы уверенны что хотите удалить заказ '%(object)s'?\n"
+"            "
+
+#: foodprod/templates/foodprod/orders.html:5
+msgid "List of orders"
+msgstr "Список заказов"
+
+#: foodprod/templates/foodprod/orders.html:29
+msgid "No orders yet."
+msgstr "Заказов пока нет."
+
+#: notes/models.py:9
+msgid "Title"
+msgstr "Заголовок"
+
+#: notes/models.py:10
+msgid "Body"
+msgstr "Основная часть"
+
+#: notes/templates/notes/notes.html:5
+msgid "List of notes"
+msgstr "Список заметок"
+
+#: notes/templates/notes/notes.html:22
+msgid "No notes yet."
+msgstr "Заметок пока нет."
+
+#: notes/templates/notes/notes_type_selection.html:6
+msgid "Select type"
+msgstr "Выбирите тип"
+
+#: notes/templates/notes/notes_type_selection.html:7
+msgid "Select entity type to see the list of notes"
+msgstr "Выбирите тип сущности чтобы увидеть список заметок"
+
+#: notes/templates/notes/notes_type_selection.html:9
+msgid "Dishes"
+msgstr "Блюда"
+
+#: registration/forms.py:11
+msgid "I'm a cook"
+msgstr "Я повар"
+
+#: registration/forms.py:12
+msgid "Determines whether the user can create dishes."
+msgstr "Определяет, может ли пользователь добавлять блюда"
+
+#: registration/templates/registration/login.html:5
+msgid "Your username and password didn't match. Please try again."
+msgstr "Ваш ник или пароль не найден. Попробуйте еще раз."
+
+#: registration/templates/registration/login.html:12
+msgid "Please login to see this page."
+msgstr "Пожалуйста войдите, что-бы увидеть эту страницу"
+
+#: registration/templates/registration/login.html:18
+msgid "Please sign in"
+msgstr "Пожалуйста войдите"
+
+#: registration/templates/registration/register.html:6
+msgid "Please register"
+msgstr "Пожалуйста зарегистрируйтесь"
+
+#~ msgid "ingredient"
+#~ msgstr "Ингредиент"
+
+#~ msgid "quantity"
+#~ msgstr "Количество"

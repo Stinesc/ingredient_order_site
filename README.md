@@ -18,24 +18,16 @@ sudo -u postgres psql
 ```bash
 CREATE DATABASE ingredient_order_site_db;
 CREATE USER ingredient_order_site_db_admin WITH PASSWORD '123';
+ALTER USER ingredient_order_site_db_admin CREATEDB; (for tests)
 CTRL + D
 ```
-#### Create, activate virtual environment and install packages:
+#### Run with Docker:
 ```bash
-virtualenv -p python3 env
-source env/bin/activate
-pip3 install -r requirements.txt
+sudo docker-compose run web python3 manage.py migrate
+sudo docker-compose run web python3 manage.py createsuperuser
+sudo docker-compose up
 ```
-#### Make migrations and migrate:
+#### Run tests:
 ```bash
-python3 manage.py makemigrations
-python3 manage.py migrate
-```
-#### Create superuser:
-```bash
-python3 manage.py createsuperuser
-```
-#### Run server:
-```bash
-python3 manage.py runserver
+python3 manage.py test
 ```
